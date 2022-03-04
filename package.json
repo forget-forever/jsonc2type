@@ -1,0 +1,42 @@
+{
+  "name": "jsonc2type",
+  "version": "1.0.0",
+  "description": "json comment translate typescript type!",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "ts-node --transpile-only src/test.ts",
+    "dev:comment": "启动开发环境, 建议直接使用ts-node运行。",
+    "dev": "ts-node --transpile-only src/index.ts",
+    "build:comment": "构建",
+    "build": "rm -rf lib && tsc --build",
+    "eslint:comment": "使用 ESLint 检查并自动修复 src 目录下所有扩展名为 .ts 的文件",
+    "eslint": "eslint --fix src --ext .ts --max-warnings=0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forget-forever/jsonc2type.git"
+  },
+  "keywords": [
+    "jsonc",
+    "typecript",
+    "type"
+  ],
+  "author": "zml",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/forget-forever/jsonc2type/issues"
+  },
+  "homepage": "https://github.com/forget-forever/jsonc2type#readme",
+  "devDependencies": {
+    "@types/node": "^17.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
+    "eslint": "^8.5.0",
+    "ts-node-dev": "^1.1.8"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.179",
+    "lodash": "^4.17.21",
+    "typeof-jsonc": "^1.1.10"
+  }
+}
