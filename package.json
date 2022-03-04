@@ -1,6 +1,6 @@
 {
   "name": "jsonc2type",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "json comment translate typescript type!",
   "main": "lib/index.js",
   "scripts": {
