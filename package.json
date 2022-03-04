@@ -1,7 +1,7 @@
 {
   "name": "jsonc2type",
   "version": "1.0.1",
-  "description": "json comment translate typescript type!",
+  "description": "json comment translate typescript to type!",
   "main": "lib/index.js",
   "scripts": {
     "test": "ts-node --transpile-only src/test.ts",

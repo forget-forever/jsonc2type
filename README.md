@@ -2,7 +2,7 @@
 
 ## describe
 
-json comment translate typescript type!
+json comment translate typescript to type!
 
 ## how to use
 
