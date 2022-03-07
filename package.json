@@ -37,6 +37,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.179",
     "lodash": "^4.17.21",
+    "path": "^0.12.7",
     "typeof-jsonc": "^1.1.10"
   }
 }

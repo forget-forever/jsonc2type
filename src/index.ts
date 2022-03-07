@@ -1,9 +1,11 @@
 /*
  * @Author: zml
  * @Date: 2022-02-25 18:57:05
- * @LastEditTime: 2022-03-07 16:59:22
+ * @LastEditTime: 2022-03-07 19:29:19
  */
+import { writeFileSync } from "fs"
 import { upperFirst } from "lodash"
+import { resolve } from "path"
 import typeofJsonc from "typeof-jsonc"
 import { deleteNullStr } from "./utils"
 
@@ -12,15 +14,14 @@ const basicType = ['string', 'number', 'boolean', "", 'any', 'unknown', 'never',
 const isArrReg = /\w+\[\]$/
 
 const splitType = (str: string, typeName: string): string => {
-  // const interfaceReg = new RegExp(`(?<=interface( )+${typeName.trim()}( )+)(.[\\s\\S]*?)(?=.*(((export)|(declare))?( )+interface)|$)`, 'g')
-  // const typeReg = new RegExp(`(?<=declare( )+type( )+${typeName.trim()}( )+=)(.[\\s\\S]*?)(?=.)`)
-  // console.log(typeName)
+  const lineReg = new RegExp(`(?<=(type( )+${typeName.trim()}( )*=( )+))(.[\\w]*?)(?=(;[\\s\\t]+)|$)`, 'g')
+  const [lineVal] = str.match(lineReg) || ['']
+  if (lineVal.trim()) {
+    return splitType(str, lineVal.trim())
+  }
   const startReg = new RegExp(`(?<=(interface( )+${typeName.trim()}( )+)|(type( )+${typeName.trim()}( )*=( )*))(.[\\s\\S]*?)(?=(export( )+(\\w)+)|(declare( )+(\\w)+)|$)`, 'g')
   const [res] = str.match(startReg) || ['']
   const resVal = deleteNullStr(res)
-  if (/\w+;?$/.test(resVal) && !basicType.includes(resVal)) {
-    return splitType(str, resVal.replace(/;/g, ''))
-  }
   return resVal
 }
 
@@ -38,7 +39,7 @@ type TypeParseStr = string;
  * @returns 
  */
 const parseType = (parseStr: string, typeStr: string): TypeParseStr => {
-  return parseStr.replace(/(?<=\w(\?)?:\s+)(.[\w\s|[\]]*)(?=;[\n\\n]?(\t)?)/gs, (subStr) => {
+  return parseStr.replace(/(?<=(\w)+(\?)?:\s+)(.[\w\s|[\]]*)(?=;[\n\\n]?(\t)?)/gs, (subStr) => {
     const subArr = subStr.split('|')
     return subArr.map((item) => {
       let ele = item.trim()
@@ -68,6 +69,7 @@ const jsonc2type = (jsonc: string, options: IOptions) => {
   const { name, startNode } = options
   const type = typeofJsonc(jsonc, name, { addExport: false, singleLineJsDocComments: true })
   // console.log(splitType(type, upperFirst(startNode)))
+  // writeFileSync(resolve(__dirname, '.type.d.ts' ), type)
   let typeStr = parseType(splitType(type, upperFirst(startNode)), type)
   // const strtReg = new RegExp(//)
   if (!typeStr) {
