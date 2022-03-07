@@ -1,11 +1,9 @@
 /*
  * @Author: zml
  * @Date: 2022-02-25 18:57:05
- * @LastEditTime: 2022-03-07 19:29:19
+ * @LastEditTime: 2022-03-07 19:34:44
  */
-import { writeFileSync } from "fs"
 import { upperFirst } from "lodash"
-import { resolve } from "path"
 import typeofJsonc from "typeof-jsonc"
 import { deleteNullStr } from "./utils"
 
