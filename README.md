@@ -1,8 +1,8 @@
 # jsonc2type
 
-## describe
+## description
 
-json comment translate typescript to type!
+json comment string translate to typescript to type!
 
 ## how to use
 

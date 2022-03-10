@@ -1,10 +1,11 @@
 /*
  * @Author: zml
  * @Date: 2022-02-25 18:57:05
- * @LastEditTime: 2022-03-07 19:34:44
+ * @LastEditTime: 2022-03-10 14:40:26
  */
 import { upperFirst } from "lodash"
 import typeofJsonc from "typeof-jsonc"
+import type { Options } from 'typeof-jsonc'
 import { deleteNullStr } from "./utils"
 
 const basicType = ['string', 'number', 'boolean', "", 'any', 'unknown', 'never', 'object', 'Object', 'undefined', 'null',]
@@ -24,8 +25,19 @@ const splitType = (str: string, typeName: string): string => {
 }
 
 type IOptions = {
+  /**
+   * field where you want to start collecting ts type，can set the same as ‘name’ field to collect whole types
+   * @requires -true
+   */
   startNode: string;
+  /**
+   * name of the ts type
+   */
   name: string;
+  /**
+   * typeof-jsonc plugin's options
+   */
+  typeofJsoncOptions?: Options
 }
 
 type TypeParseStr = string;
@@ -63,9 +75,15 @@ const getInlineType = (typeStr: string, node: string) => {
   return (firstType.match(reg) || [''])[0]
 }
 
+/**
+ * create ts type from jsonc
+ * @param jsonc jsonc string
+ * @param options config
+ * @returns 
+ */
 const jsonc2type = (jsonc: string, options: IOptions) => {
-  const { name, startNode } = options
-  const type = typeofJsonc(jsonc, name, { addExport: false, singleLineJsDocComments: true })
+  const { name, startNode, typeofJsoncOptions } = options
+  const type = typeofJsonc(jsonc, name, { addExport: false, singleLineJsDocComments: true, ...typeofJsoncOptions })
   // console.log(splitType(type, upperFirst(startNode)))
   // writeFileSync(resolve(__dirname, '.type.d.ts' ), type)
   let typeStr = parseType(splitType(type, upperFirst(startNode)), type)
