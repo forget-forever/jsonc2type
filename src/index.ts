@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-02-25 18:57:05
- * @LastEditTime: 2022-03-10 14:40:26
+ * @LastEditTime: 2022-03-10 14:52:10
  */
 import { upperFirst } from "lodash"
 import typeofJsonc from "typeof-jsonc"
@@ -43,7 +43,7 @@ type IOptions = {
 type TypeParseStr = string;
 
 /**
- * handle types，merge all type to a types
+ * handle types，merge all types to a type
  * @param parseStr type
  * @param typeStr string types
  * @returns 
