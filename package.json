@@ -1,8 +1,9 @@
 {
   "name": "jsonc2type",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "json comment translate typescript to type!",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "ts-node --transpile-only src/test.ts",
     "dev:comment": "启动开发环境, 建议直接使用ts-node运行。",
@@ -10,7 +11,8 @@
     "build:comment": "构建",
     "build": "rm -rf lib && tsc --build",
     "eslint:comment": "使用 ESLint 检查并自动修复 src 目录下所有扩展名为 .ts 的文件",
-    "eslint": "eslint --fix src --ext .ts --max-warnings=0"
+    "eslint": "eslint --fix src --ext .ts --max-warnings=0",
+    "release": "tsc && npm publish"
   },
   "repository": {
     "type": "git",
