@@ -2,7 +2,7 @@
 
 ## description
 
-json comment string translate to typescript to type!
+json with comment string translate to typescript to type!
 
 ## how to use
 
